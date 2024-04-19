@@ -1,4 +1,5 @@
 using Bookstore.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +31,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute("pagination", "Booklist/{pageNum}", new {Controller = "Home", action = "Index"});
+app.MapControllerRoute("pagenumandtype", "{bookType}/{pageNum}", new { Controller = "Home", action = "Index" });
+app.MapControllerRoute("bookType", "{bookType}", new { Controller = "Home", action = "Index", pageNum = 1 });
+app.MapControllerRoute("pagination", "{pageNum}", new { Controller = "Home", action = "Index", pageNum = 1 });
 
 app.MapDefaultControllerRoute();
 
